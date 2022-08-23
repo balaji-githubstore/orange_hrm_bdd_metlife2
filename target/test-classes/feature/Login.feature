@@ -22,4 +22,4 @@ Feature: Login
     When I enter username as 'Admin'
     And I enter password as 'admin123'
     And I click on login
-    Then I should get access to the portal with menu as 'My Info'
+    Then I should get access to the portal with menu as 'My Info123'
