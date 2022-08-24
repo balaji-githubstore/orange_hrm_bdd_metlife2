@@ -10,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 public class AutomationHooks {
     public WebDriver driver;
 
-
     @After
     public void endScenario(Scenario scenario) {
 
@@ -22,8 +21,6 @@ public class AutomationHooks {
             byte[] bytes = ts.getScreenshotAs(OutputType.BYTES);
             scenario.attach(bytes, "image/png", scenario.getName());
         }
-
-
         if (driver != null) {
             driver.quit();
         }
