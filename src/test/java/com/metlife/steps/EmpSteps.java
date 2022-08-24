@@ -1,6 +1,7 @@
 package com.metlife.steps;
 
 import com.metlife.base.AutomationHooks;
+import com.metlife.base.DataTrasfer;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,21 +15,31 @@ import java.util.Map;
 
 public class EmpSteps {
     private static DataTable dt;
+    private final DataTrasfer transfer;
+    private AutomationHooks hooks;
+
+    public EmpSteps(AutomationHooks hooks, DataTrasfer trasfer)
+    {
+        this.hooks=hooks;
+        this.transfer=trasfer;
+    }
+
     @When("I click PIM")
     public void i_click_pim() {
 
-        AutomationHooks.driver.findElement(By.linkText("PIM")).click();
+        hooks.driver.findElement(By.linkText("PIM")).click();
     }
 
     @When("I click on Add Employee")
     public void i_click_on_add_employee() {
-        AutomationHooks.driver.findElement(By.linkText("Add Employee")).click();
+        hooks.driver.findElement(By.linkText("Add Employee")).click();
     }
 
     @When("I fill the add employee details")
     public void i_fill_the_add_employee_details(DataTable dataTable) {
 
         dt=dataTable;
+        transfer.empDatable=dataTable;
         List<Map<String, String>> ls = dataTable.asMaps();
 
         String firstName = ls.get(0).get("firstname");
@@ -41,9 +52,9 @@ public class EmpSteps {
         String confirmPassword = ls.get(0).get("confirm_password");
         String status = ls.get(0).get("status");
 
-        AutomationHooks.driver.findElement(By.name("firstName")).sendKeys(firstName);
-        AutomationHooks.driver.findElement(By.name("middleName")).sendKeys(middleName);
-        AutomationHooks.driver.findElement(By.name("lastName")).sendKeys(lastname);
+        hooks.driver.findElement(By.name("firstName")).sendKeys(firstName);
+        hooks.driver.findElement(By.name("middleName")).sendKeys(middleName);
+        hooks.driver.findElement(By.name("lastName")).sendKeys(lastname);
 
 
 //        WebElement ele= AutomationHooks.driver.findElement(By.xpath("//label[text()='Employee Id']/following::input"));
@@ -54,33 +65,33 @@ public class EmpSteps {
 //        AutomationHooks.driver.findElement(By.xpath("//label[text()='Employee Id']/following::input")).sendKeys(empId);
 
         if (toggleCreateLogin.equalsIgnoreCase("yes")) {
-            AutomationHooks.driver.findElement(By.xpath("//*[text()='Create Login Details']/following::span")).click();
+            hooks.driver.findElement(By.xpath("//*[text()='Create Login Details']/following::span")).click();
         }
 
         //username
-        AutomationHooks.driver.findElement(By.xpath("//label[text()='Username']/following::input")).sendKeys(userName);
+        hooks.driver.findElement(By.xpath("//label[text()='Username']/following::input")).sendKeys(userName);
         // password
-        AutomationHooks.driver.findElement(By.xpath("//label[text()='Password']/following::input")).sendKeys(password);
+        hooks.driver.findElement(By.xpath("//label[text()='Password']/following::input")).sendKeys(password);
         // confirm password
-        AutomationHooks.driver.findElement(By.xpath("//label[text()='Confirm Password']/following::input")).sendKeys(confirmPassword);
+        hooks.driver.findElement(By.xpath("//label[text()='Confirm Password']/following::input")).sendKeys(confirmPassword);
 
         //click on status
         if (status.equalsIgnoreCase("disabled")) {
-            AutomationHooks.driver.findElement(By.xpath("//label[text()='Disabled']")).click();
+            hooks.driver.findElement(By.xpath("//label[text()='Disabled']")).click();
         }
-        AutomationHooks.driver.findElement(By.xpath("//label[text()='Employee Id']/following::input")).clear();
-        AutomationHooks.driver.findElement(By.xpath("//label[text()='Employee Id']/following::input")).sendKeys(empId);
+        hooks.driver.findElement(By.xpath("//label[text()='Employee Id']/following::input")).clear();
+        hooks.driver.findElement(By.xpath("//label[text()='Employee Id']/following::input")).sendKeys(empId);
     }
 
     @When("I click on save employee")
     public void i_click_on_save_employee() {
-        AutomationHooks.driver.findElement(By.xpath("//button[normalize-space()='Save']")).click();
+        hooks.driver.findElement(By.xpath("//button[normalize-space()='Save']")).click();
     }
 
     @Then("I should get the employee firstname as {string}")
     public void i_should_get_the_employee_firstname_as(String expectedFirstName) {
 
-      String actualFirstName=  AutomationHooks.driver.findElement(By.name("firstName")).getAttribute("value");
+      String actualFirstName=  hooks.driver.findElement(By.name("firstName")).getAttribute("value");
         Assert.assertEquals(actualFirstName,expectedFirstName);
     }
 
@@ -98,7 +109,7 @@ public class EmpSteps {
         String confirmPassword = ls.get(0).get("confirm_password");
         String status = ls.get(0).get("status");
 
-        String actualFirstName=  AutomationHooks.driver.findElement(By.name("firstName")).getAttribute("value");
+        String actualFirstName=  hooks.driver.findElement(By.name("firstName")).getAttribute("value");
         Assert.assertEquals(actualFirstName,firstName);
     }
 }

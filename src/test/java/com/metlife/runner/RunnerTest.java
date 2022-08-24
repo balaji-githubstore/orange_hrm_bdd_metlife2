@@ -8,7 +8,7 @@ import io.cucumber.testng.CucumberOptions;
         ,glue = {"com.metlife.steps","com.metlife.base"}
         ,publish = true
         ,plugin = {"html:target/cucumber-report.html","rerun:target/rerun.txt"}
-        ,tags = "@login"
+        ,tags = "@addemployee"
 //        ,dryRun = true
 //        ,tags = "not @addemployee and (@valid and @high)"
 )

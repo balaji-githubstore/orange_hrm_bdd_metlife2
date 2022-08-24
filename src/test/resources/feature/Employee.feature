@@ -18,7 +18,8 @@ Feature: Employee
     And I click on save employee
     Then I should get the employee firstname as '<fname>'
     And I should get the added employee details
+    And I should see the same data in personal information section
     Examples:
       | fname | mname | lname | empid | toogle | username      | password | cpassword | status   |
-      | John  | w     | Wick  | 80111 | yes    | john_w12345w4  | Demo@123 | Demo@123  | Disabled |
-      | Peter | w     | mike  | 80115 | yes    | peter_w12345e | Demo@123 | Demo@123  | Enabled  |
+      | John  | w     | Wick  | 801112 | yes    | john_w12345w4  | Demo@123 | Demo@123  | Disabled |
+#      | Peter | w     | mike  | 80115 | yes    | peter_w12345e | Demo@123 | Demo@123  | Enabled  |
