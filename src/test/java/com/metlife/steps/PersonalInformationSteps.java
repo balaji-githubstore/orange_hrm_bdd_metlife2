@@ -1,7 +1,7 @@
 package com.metlife.steps;
 
 import com.metlife.base.AutomationHooks;
-import com.metlife.base.DataTrasfer;
+import com.metlife.base.DataTransfer;
 import io.cucumber.java.en.Then;
 
 import java.util.List;
@@ -9,10 +9,10 @@ import java.util.Map;
 
 public class PersonalInformationSteps {
 
-    private final DataTrasfer transfer;
+    private final DataTransfer transfer;
     private AutomationHooks hooks;
 
-    public PersonalInformationSteps(AutomationHooks hooks, DataTrasfer trasfer)
+    public PersonalInformationSteps(AutomationHooks hooks, DataTransfer trasfer)
     {
         this.hooks=hooks;
         this.transfer=trasfer;

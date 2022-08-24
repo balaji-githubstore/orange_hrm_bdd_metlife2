@@ -1,24 +1,22 @@
 package com.metlife.steps;
 
 import com.metlife.base.AutomationHooks;
-import com.metlife.base.DataTrasfer;
+import com.metlife.base.DataTransfer;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.util.List;
 import java.util.Map;
 
 public class EmpSteps {
-    private static DataTable dt;
-    private final DataTrasfer transfer;
+    //private static DataTable dt;
+    private final DataTransfer transfer;
     private AutomationHooks hooks;
 
-    public EmpSteps(AutomationHooks hooks, DataTrasfer trasfer)
+    public EmpSteps(AutomationHooks hooks, DataTransfer trasfer)
     {
         this.hooks=hooks;
         this.transfer=trasfer;
@@ -38,7 +36,7 @@ public class EmpSteps {
     @When("I fill the add employee details")
     public void i_fill_the_add_employee_details(DataTable dataTable) {
 
-        dt=dataTable;
+        //dt=dataTable;
         transfer.empDatable=dataTable;
         List<Map<String, String>> ls = dataTable.asMaps();
 
@@ -97,7 +95,7 @@ public class EmpSteps {
 
     @Then("I should get the added employee details")
     public void i_should_get_the_employee_id_as() {
-        List<Map<String, String>> ls = dt.asMaps();
+        List<Map<String, String>> ls = transfer.empDatable.asMaps();
 
         String firstName = ls.get(0).get("firstname");
         String middleName = ls.get(0).get("middlename");

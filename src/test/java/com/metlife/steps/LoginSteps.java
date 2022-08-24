@@ -1,13 +1,12 @@
 package com.metlife.steps;
 
 import com.metlife.base.AutomationHooks;
-import com.metlife.base.DataTrasfer;
+import com.metlife.base.DataTransfer;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.Assert;
 
@@ -16,7 +15,7 @@ import java.time.Duration;
 public class LoginSteps  {
 
     private AutomationHooks hooks;
-    public LoginSteps(AutomationHooks hooks, DataTrasfer trasfer)
+    public LoginSteps(AutomationHooks hooks, DataTransfer trasfer)
     {
         this.hooks=hooks;
         trasfer.count=trasfer.count+1;
