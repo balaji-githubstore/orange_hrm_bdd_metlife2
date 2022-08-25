@@ -1,9 +1,10 @@
 package com.metlife.pages;
 
+import com.metlife.base.AutomationKeywords;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class MainPage {
+public class MainPage extends AutomationKeywords {
     private By adminLocator=By.xpath("//span[text()='Admin']");
     private By myInfoLocator=By.xpath("//*[text()='My Info']");
     private By pimLocator=By.linkText("PIM");
@@ -12,28 +13,29 @@ public class MainPage {
 
     public MainPage(WebDriver driver)
     {
+        super(driver);
         this.driver=driver;
     }
 
     public void clickOnAdminMenu()
     {
-               driver.findElement(adminLocator).click();
+         clickUsingLocator(adminLocator);
 
     }
 
     public void clickOnPIMMenu()
     {
-        driver.findElement(pimLocator).click();
-
+        clickUsingLocator(pimLocator);
     }
 
     public String getAdminMenuText()
     {
-        return driver.findElement(adminLocator).getText();
+
+        return getTextUsingLocator(adminLocator);
     }
 
     public String getMyInfoMenuText()
     {
-        return driver.findElement(myInfoLocator).getText();
+        return getTextUsingLocator(myInfoLocator);
     }
 }
