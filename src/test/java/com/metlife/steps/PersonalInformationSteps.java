@@ -2,6 +2,7 @@ package com.metlife.steps;
 
 import com.metlife.base.AutomationHooks;
 import com.metlife.base.DataTransfer;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Map;
 public class PersonalInformationSteps {
 
     private final DataTransfer transfer;
-    private AutomationHooks hooks;
+    private final AutomationHooks hooks;
 
     public PersonalInformationSteps(AutomationHooks hooks, DataTransfer trasfer)
     {
@@ -20,6 +21,9 @@ public class PersonalInformationSteps {
 
     @Then("I should see the same data in personal information section")
     public void i_should_see_the_same_data_in_personal_information_section() {
+
+        DataTable dt= (DataTable) transfer.keyValuePair.get("addemployee_dt");
+
         List<Map<String, String>> ls = transfer.empDatable.asMaps();
 
         String firstName = ls.get(0).get("firstname");

@@ -14,7 +14,7 @@ import java.util.Map;
 public class EmpSteps {
     //private static DataTable dt;
     private final DataTransfer transfer;
-    private AutomationHooks hooks;
+    private final AutomationHooks hooks;
 
     public EmpSteps(AutomationHooks hooks, DataTransfer trasfer)
     {
@@ -38,6 +38,8 @@ public class EmpSteps {
 
         //dt=dataTable;
         transfer.empDatable=dataTable;
+        transfer.keyValuePair.put("addemployee_dt",dataTable);
+
         List<Map<String, String>> ls = dataTable.asMaps();
 
         String firstName = ls.get(0).get("firstname");

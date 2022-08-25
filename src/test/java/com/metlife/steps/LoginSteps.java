@@ -2,6 +2,7 @@ package com.metlife.steps;
 
 import com.metlife.base.AutomationHooks;
 import com.metlife.base.DataTransfer;
+import com.metlife.pages.LoginPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -14,7 +15,7 @@ import java.time.Duration;
 
 public class LoginSteps  {
 
-    private AutomationHooks hooks;
+    private final AutomationHooks hooks;
     public LoginSteps(AutomationHooks hooks, DataTransfer trasfer)
     {
         this.hooks=hooks;
@@ -35,6 +36,7 @@ public class LoginSteps  {
 
     @When("I enter username as {string}")
     public void i_enter_username_as(String username) {
+
         hooks.driver.findElement(By.name("username")).sendKeys(username);
     }
 
