@@ -2,6 +2,10 @@ package com.metlife.steps;
 
 import com.metlife.base.AutomationHooks;
 import com.metlife.base.DataTransfer;
+import com.metlife.pages.AddEmployeePage;
+import com.metlife.pages.LoginPage;
+import com.metlife.pages.MainPage;
+import com.metlife.pages.PIMPage;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -16,21 +20,35 @@ public class EmpSteps {
     private final DataTransfer transfer;
     private final AutomationHooks hooks;
 
+    private MainPage mainPage;
+    private PIMPage pimPage;
+
+    private AddEmployeePage addEmployeePage;
+
     public EmpSteps(AutomationHooks hooks, DataTransfer trasfer)
     {
         this.hooks=hooks;
         this.transfer=trasfer;
+
+        initPageObject();
     }
+
+    public void initPageObject() {
+        mainPage = new MainPage(hooks.driver);
+        pimPage=new PIMPage(hooks.driver);
+        addEmployeePage=new AddEmployeePage(hooks.driver);
+    }
+
 
     @When("I click PIM")
     public void i_click_pim() {
 
-        hooks.driver.findElement(By.linkText("PIM")).click();
+        mainPage.clickOnPIMMenu();
     }
 
     @When("I click on Add Employee")
     public void i_click_on_add_employee() {
-        hooks.driver.findElement(By.linkText("Add Employee")).click();
+        pimPage.clickOnAddEmployee();
     }
 
     @When("I fill the add employee details")
@@ -52,9 +70,12 @@ public class EmpSteps {
         String confirmPassword = ls.get(0).get("confirm_password");
         String status = ls.get(0).get("status");
 
-        hooks.driver.findElement(By.name("firstName")).sendKeys(firstName);
+//        hooks.driver.findElement(By.name("firstName")).sendKeys(firstName);
+        addEmployeePage.enterFirstName(firstName);
         hooks.driver.findElement(By.name("middleName")).sendKeys(middleName);
-        hooks.driver.findElement(By.name("lastName")).sendKeys(lastname);
+
+//        hooks.driver.findElement(By.name("lastName")).sendKeys(lastname);
+        addEmployeePage.enterLastName(lastname);
 
 
 //        WebElement ele= AutomationHooks.driver.findElement(By.xpath("//label[text()='Employee Id']/following::input"));
